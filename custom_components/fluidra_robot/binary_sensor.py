@@ -26,7 +26,6 @@ async def async_setup_entry(
             FluidraConnectedBinarySensor(coordinator, entry),
             FluidraCleaningBinarySensor(coordinator, entry),
             FluidraChargingBinarySensor(coordinator, entry),
-            FluidraCycleEndedBinarySensor(coordinator, entry),
         ]
     )
 
@@ -84,14 +83,3 @@ class FluidraChargingBinarySensor(FluidraEntity, BinarySensorEntity):
         return state is not None and int(state) in (2, 3)
 
 
-class FluidraCycleEndedBinarySensor(FluidraEntity, BinarySensorEntity):
-    _attr_name = "Cycle Ended"
-    _attr_icon = "mdi:flag-checkered"
-
-    def __init__(self, coordinator: FluidraCoordinator, entry: ConfigEntry) -> None:
-        super().__init__(coordinator, entry)
-        self._attr_unique_id = f"{self._device_id}_cycle_ended"
-
-    @property
-    def is_on(self) -> bool:
-        return self._get_reported(31) == 1

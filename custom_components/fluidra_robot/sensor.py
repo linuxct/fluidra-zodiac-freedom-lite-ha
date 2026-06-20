@@ -102,12 +102,23 @@ class FluidraLastCleanSensor(FluidraEntity, SensorEntity):
         raw = self._get_reported(28)
         if not raw:
             return None
+        s = str(raw).strip()
+        # fromisoformat handles "YYYY-MM-DD HH:MM:SS", "YYYY-MM-DDTHH:MM:SS",
+        # and offset variants; replace Z so Python <3.11 doesn't choke on it.
         try:
-            # Format: "YYYY-MM-DD HH:MM:SS"
-            dt = datetime.strptime(str(raw)[:19], "%Y-%m-%d %H:%M:%S")
-            return dt.replace(tzinfo=timezone.utc)
-        except (ValueError, TypeError):
-            return None
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt
+        except ValueError:
+            pass
+        # Fallback: strip to 19 chars and try both separators
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S"):
+            try:
+                return datetime.strptime(s[:19], fmt).replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+        return None
 
     @property
     def extra_state_attributes(self) -> dict:
