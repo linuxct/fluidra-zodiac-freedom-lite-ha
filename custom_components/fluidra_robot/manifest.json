@@ -1,0 +1,12 @@
+{
+  "domain": "fluidra_robot",
+  "name": "Fluidra Robot Cleaner",
+  "version": "1.0.0",
+  "documentation": "https://github.com/linuxct/ha-fluidra-robot",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@linuxct"],
+  "iot_class": "cloud_polling",
+  "config_flow": true,
+  "integration_type": "device"
+}

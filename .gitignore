@@ -1,0 +1,27 @@
+# Personal credentials / local dev scripts
+debug_device.sh
+
+# Claude Code session data
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Reverse engineering workspace (not part of the HA integration)
+apks/
+extracted/
+blutter/
+blutter_out/
+decompiled/
+jadx_out/
+*.apk

@@ -1,0 +1,30 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Fluidra Account",
+        "description": "Enter your Fluidra Pool app credentials.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "select_device": {
+        "title": "Select Robot",
+        "description": "Choose the robot cleaner to add to Home Assistant.",
+        "data": {
+          "robot": "Robot"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the Fluidra API. Check your network connection.",
+      "invalid_auth": "Invalid email or password.",
+      "no_devices": "No robot cleaners were found in your Fluidra account."
+    },
+    "abort": {
+      "already_configured": "This robot is already configured in Home Assistant.",
+      "no_devices": "No robot cleaners were found in your pools."
+    }
+  }
+}
